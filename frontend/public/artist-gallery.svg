@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" fill="none">
+  <defs>
+    <linearGradient id="paper" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f9f5ec"/><stop offset="1" stop-color="#e6ddcc"/></linearGradient>
+    <linearGradient id="dune" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#d4b599"/><stop offset="1" stop-color="#ad876b"/></linearGradient>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#a9bbb0"/><stop offset="1" stop-color="#e4e0cd"/></linearGradient>
+    <filter id="drop" x="-30%" y="-35%" width="180%" height="190%"><feDropShadow dx="0" dy="13" stdDeviation="13" flood-color="#51473a" flood-opacity=".16"/></filter>
+  </defs>
+  <!-- Three original, framed abstract artworks: references to a gallery rather than stock art -->
+  <g filter="url(#drop)">
+    <g transform="translate(52 66) rotate(-6 112 112)">
+      <rect width="224" height="230" rx="3" fill="#9d7856"/>
+      <rect x="8" y="8" width="208" height="214" fill="#f7f2e6"/>
+      <rect x="22" y="22" width="180" height="186" fill="url(#paper)"/>
+      <path d="M22 156C76 120 94 134 120 114C145 94 172 99 202 67V208H22Z" fill="#bd887d" opacity=".82"/>
+      <path d="M22 179C82 146 139 190 202 130V208H22Z" fill="#8a9882"/>
+      <circle cx="155" cy="70" r="28" fill="#e7cc9e"/>
+    </g>
+    <g transform="translate(262 14) rotate(3 108 144)">
+      <rect width="214" height="288" rx="3" fill="#83684f"/>
+      <rect x="9" y="9" width="196" height="270" fill="#faf7ee"/>
+      <rect x="22" y="22" width="170" height="244" fill="#efe3d2"/>
+      <path d="M48 242C62 171 92 129 98 82C103 52 147 38 162 70C175 96 165 139 145 164C121 194 110 214 115 242" stroke="#9f7566" stroke-width="13" stroke-linecap="round"/>
+      <path d="M89 219C50 180 40 137 65 115C79 105 97 123 103 141" stroke="#b89285" stroke-width="22" stroke-linecap="round"/>
+      <path d="M116 206C167 186 170 140 154 131" stroke="#718f7e" stroke-width="18" stroke-linecap="round"/>
+      <circle cx="139" cy="83" r="24" fill="#d0ae7f" opacity=".78"/>
+    </g>
+    <g transform="translate(474 74) rotate(6 98 108)">
+      <rect width="196" height="224" rx="3" fill="#9a7957"/>
+      <rect x="8" y="8" width="180" height="208" fill="#f7f1e6"/>
+      <rect x="20" y="20" width="156" height="184" fill="url(#sky)"/>
+      <circle cx="135" cy="64" r="25" fill="#f2d7a1" opacity=".95"/>
+      <path d="M20 146L74 71L119 129L150 98L176 129V204H20Z" fill="#78907b"/>
+      <path d="M20 157C66 123 107 173 176 140V204H20Z" fill="#4d715f"/>
+      <path d="M20 186C91 161 123 195 176 165V204H20Z" fill="#a4a485"/>
+    </g>
+  </g>
+</svg>

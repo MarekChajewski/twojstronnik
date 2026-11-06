@@ -1,0 +1,32 @@
+---
+import Projects from './Projects.astro';
+
+const projects = [
+  {
+    eyebrow: 'Sztuka / sklep i galeria',
+    title: 'Czas na obraz',
+    description: 'Serwis dla artystki łączący prezentację prac z funkcjami sprzedażowymi i panelem administracyjnym.',
+    href: 'https://czasnaobraz.pl',
+    tags: ['galeria', 'zarządzanie pracami', 'wdrożenie'],
+  },
+  {
+    eyebrow: 'Sztuka / galeria',
+    title: 'Opowieści Kolorem',
+    description: 'Galeria artystyczna z podziałem prac, formularzami zapytań i możliwością samodzielnej edycji treści.',
+    href: 'https://opowiescikolorem.pl',
+    tags: ['obrazy i ceramika', 'zapytania o dzieło', 'CMS'],
+  },
+  {
+    eyebrow: 'Przewodnik / oferta wycieczek',
+    title: 'APS-Arek',
+    description: 'Strona przewodnicka prezentująca ofertę wycieczek, cennik, informacje o przewodniku i kontakt.',
+    href: 'https://aps-arek.pl',
+    tags: ['wycieczki', 'cennik', 'oferta'],
+  },
+];
+---
+<Projects
+  title="Realizacje, na których opieram ten kierunek"
+  intro="To nie są przykładowe makiety. To działające strony, które pokazały mi, że warto specjalizować Twój Stronnik właśnie w tych dwóch grupach."
+  projects={projects}
+/>

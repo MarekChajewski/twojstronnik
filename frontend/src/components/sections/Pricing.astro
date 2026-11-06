@@ -1,0 +1,46 @@
+---
+interface Props {
+  title?: string;
+  text?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+  setupPrice?: string;
+  monthlyPrice?: string;
+  includedText?: string;
+}
+
+const {
+  title = 'Bez sztywnych pakietów i przypadkowych dodatków',
+  text = 'Zakres i cenę ustalam pod konkretną stronę. Prosta prezentacja działalności nie powinna kosztować tyle samo co rozbudowana galeria, sklep czy serwis z wieloma ofertami.',
+  buttonLabel,
+  buttonHref = '#kontakt',
+  setupPrice,
+  monthlyPrice,
+  includedText,
+} = Astro.props;
+
+const showPriceCards = Boolean(setupPrice && monthlyPrice);
+---
+<section class="pricing" id="wycena">
+  <div class="container">
+    <span class="eyebrow">Wycena</span>
+    <h2>{title}</h2>
+    <p>{text}</p>
+    {showPriceCards && (
+      <div class="pricing-price-grid" aria-label="Cennik">
+        <div class="pricing-price-card">
+          <span class="pricing-price-label">Jednorazowe uruchomienie</span>
+          <strong class="pricing-price-value">{setupPrice}</strong>
+          <span class="pricing-price-caption">Przygotowanie i wdrożenie strony</span>
+        </div>
+        <div class="pricing-price-card">
+          <span class="pricing-price-label">Abonament miesięczny</span>
+          <strong class="pricing-price-value">{monthlyPrice}</strong>
+          <span class="pricing-price-caption">Utrzymanie i opieka techniczna</span>
+        </div>
+      </div>
+    )}
+    {includedText && <p class="pricing-included">{includedText}</p>}
+    {buttonLabel && buttonHref && <a class="button button-primary" href={buttonHref}>{buttonLabel}</a>}
+  </div>
+</section>

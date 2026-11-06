@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import About from '../../components/sections/About.astro';
+import Projects from '../../components/sections/Projects.astro';
+import Steps from '../../components/sections/Steps.astro';
+import Pricing from '../../components/sections/Pricing.astro';
+import Contact from '../../components/sections/Contact.astro';
+
+const features = [
+  {
+    title: 'Samodzielne dodawanie i edycja prac',
+    text: 'Możliwość aktualizowania galerii, opisów, cen, statusu sprzedane oraz dodatkowych treści.',
+  },
+  {
+    title: 'Wygodne przeglądanie i filtrowanie dzieł',
+    text: 'Odwiedzający mogą przeglądać Twoje prace według kategorii, stylu, techniki wykonania czy rozmiaru. Dzięki filtrom łatwo odnajdą interesujące ich dzieła.',
+  },
+  {
+    title: 'Kontakt albo sprzedaż — zależnie od potrzeb',
+    text: 'Strona może działać jako portfolio i galeria z zapytaniami o dzieło albo jako sklep internetowy. W każdej chwili możesz zmienić jej profil działania z galerii na sklep lub odwrotnie, bez budowania strony od nowa.',
+  },
+  {
+    title: 'Szczegółowa prezentacja każdego dzieła',
+    text: 'Każda praca otrzymuje własną stronę ze zdjęciami, możliwością ich powiększenia, dodania własnego tła do zdjęcia, opisem, wymiarami i informacjami o technice wykonania.',
+  },
+  {
+    title: 'Własne podstrony i treści',
+    text: 'Przedstaw siebie, swoją twórczość i najważniejsze informacje dla odwiedzających. Edytuj treści dedykowanych podstron samodzielnie, w dowolnym momencie.',
+  },
+  {
+    title: 'Automatyczne powiadomienia e-mail',
+    text: 'Otrzymuj automatyczne powiadomienia e-mail o zapytaniach klientów i nowych zamówieniach, aby nie przeoczyć żadnej wiadomości.',
+  },
+];
+
+const projects = [
+  {
+    eyebrow: 'Galeria i sprzedaż',
+    title: 'Czas na obraz',
+    href: 'https://czasnaobraz.pl',
+    logo: '/project-czasnaobraz.webp',
+    logoAlt: 'Obraz reprezentujący realizację Czas na obraz',
+  },
+  {
+    eyebrow: 'Galeria artystyczna',
+    title: 'Opowieści Kolorem',
+    href: 'https://opowiescikolorem.pl',
+    logo: '/project-opowiesci.webp',
+    logoAlt: 'Obraz reprezentujący realizację Opowieści Kolorem',
+  },
+];
+
+const steps = [
+  {
+    title: 'Wybierasz gotowe rozwiązanie',
+    text: 'Decydujesz, czy Twoja strona ma działać jako galeria artystyczna, czy sklep internetowy. Wszystkie niezbędne funkcjonalności są już przygotowane.',
+  },
+  {
+    title: 'Przekazujesz podstawowe informacje',
+    text: 'Potrzebujemy jedynie nazwy Twojej galerii oraz podstawowych danych. Pozostałymi sprawami technicznymi zajmiemy się sami.',
+  },
+  {
+    title: 'Uruchamiamy Twoją stronę',
+    text: 'Przygotowujemy stronę pod Twoją marką, konfigurujemy domenę i uruchamiamy ją w internecie. Otrzymujesz dostęp do panelu administracyjnego i możesz od razu dodawać swoje prace.',
+  },
+];
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://twojstronnik.pl/dla-artystow/#service",
+  "name": "Strony internetowe, galerie i sklepy dla artystów",
+  "serviceType": "Strony internetowe, galerie i sklepy dla artystów",
+  "url": "https://twojstronnik.pl/dla-artystow/",
+  "provider": {
+    "@id": "https://twojstronnik.pl/#organization"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Polska"
+  },
+  "description": "Gotowa strona internetowa dla artysty: galeria dzieł, portfolio lub sklep internetowy. Samodzielna edycja prac i kontakt z klientami. Uruchomienie od 600 zł."
+};
+---
+<Layout
+  artistTheme
+  title="Strona internetowa dla artysty i galeria online | Twój Stronnik"
+  description="Gotowa strona internetowa dla artysty: galeria dzieł, portfolio lub sklep internetowy. Samodzielna edycja prac i kontakt z klientami. Uruchomienie od 600 zł."
+  structuredData={structuredData}
+>
+  <Hero
+    theme="artist"
+    eyebrow="Twój Stronnik dla artystów"
+    title="Ty zajmujesz się sztuką. My zajmiemy się Twoją stroną."
+    text="Otrzymujesz gotową, w pełni funkcjonalną galerię internetową opartą na naszym autorskim projekcie. Bez wiedzy technicznej, bez zbędnych komplikacji i bez wysokich kosztów tworzenia strony od podstaw."
+    primaryLabel="Zobacz realizacje"
+    primaryHref="#realizacje"
+    secondaryLabel="Porozmawiajmy o stronie"
+    secondaryHref="#kontakt"
+  />
+  <About
+    eyebrow="Strona dla artysty"
+    title="Twoja własna galeria internetowa. Pełna możliwości."
+    intro="Prezentuj swoje dzieła w profesjonalnej galerii internetowej. Dodawaj zdjęcia, opisy i nowe prace. Odbieraj zapytania od zainteresowanych klientów lub prowadź sprzedaż bezpośrednio przez stronę."
+    items={features}
+  />
+  <Projects
+    title="Nasz projekt w internecie. Sprawdź sam, jak działa."
+    intro="Zobacz działające strony oparte na naszym autorskim rozwiązaniu. Przekonaj się, jak prezentują dzieła, jakie oferują możliwości i jak może wyglądać Twoja przyszła galeria."
+    projects={projects}
+  />
+  <Steps title="Trzy kroki do własnej galerii" steps={steps} />
+  <Pricing
+    title="Twoja własna galeria w przystępnej cenie"
+    text="Profesjonalna strona internetowa nie musi oznaczać dużych wydatków. Dzięki gotowemu rozwiązaniu otrzymujesz wszystkie niezbędne funkcjonalności bez kosztów tworzenia strony od podstaw."
+    setupPrice="600 zł"
+    monthlyPrice="50 zł"
+  />
+  <Contact
+    contactType="artist"
+    title="Zainteresowała Cię nasza oferta?"
+    text="Napisz do nas, a odpowiemy na Twoje pytania i pomożemy rozpocząć korzystanie z własnej galerii internetowej."
+    messagePlaceholder="Dzień dobry, jestem zainteresowany uruchomieniem własnej galerii internetowej. Chciałbym dowiedzieć się więcej..."
+    showProjectNote={false}
+  />
+</Layout>

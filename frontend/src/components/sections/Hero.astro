@@ -1,0 +1,41 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  text: string;
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  theme?: 'default' | 'artist' | 'guide';
+}
+
+const {
+  eyebrow = 'Twój Stronnik',
+  title,
+  text,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+  theme = 'default',
+} = Astro.props;
+---
+<section class={`hero hero-${theme}`}>
+  <div class="container">
+    <span class="eyebrow">{eyebrow}</span>
+    <h1>{title}</h1>
+    <p>{text}</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href={primaryHref}>{primaryLabel}</a>
+      {secondaryLabel && secondaryHref && (
+        <a class="button button-secondary" href={secondaryHref}>{secondaryLabel}</a>
+      )}
+    </div>
+  </div>
+  {theme === 'guide' && (
+    <div class="guide-hero-art" aria-hidden="true">
+      <img src="/guide-mountains.svg" alt="" width="1050" height="760" decoding="async" />
+    </div>
+  )}
+</section>

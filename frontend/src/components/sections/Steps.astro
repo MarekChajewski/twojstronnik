@@ -1,0 +1,34 @@
+---
+interface Step {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  title?: string;
+  intro?: string;
+  steps: Step[];
+}
+
+const {
+  title = 'Prosty proces od pomysłu do działającej strony',
+  intro,
+  steps,
+} = Astro.props;
+---
+<section class="steps" id="jak-to-dziala">
+  <div class="container">
+    <span class="eyebrow">Jak to działa</span>
+    <h2>{title}</h2>
+    {intro && <p>{intro}</p>}
+    <div class="three-steps-grid">
+      {steps.map((step, index) => (
+        <article class="three-steps-item">
+          <span class="step-number" aria-hidden="true">{index + 1}</span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

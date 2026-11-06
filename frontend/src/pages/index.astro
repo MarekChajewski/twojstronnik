@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AudienceChooser from '../components/sections/AudienceChooser.astro';
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://twojstronnik.pl/#organization",
+    "name": "Twój Stronnik",
+    "url": "https://twojstronnik.pl/",
+    "logo": "https://twojstronnik.pl/logo-ts.png",
+    "email": "kontakt@twojstronnik.pl",
+    "description": "Gotowe strony internetowe dla artystów i przewodników."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://twojstronnik.pl/#website",
+    "name": "Twój Stronnik",
+    "url": "https://twojstronnik.pl/",
+    "inLanguage": "pl-PL",
+    "publisher": {
+      "@id": "https://twojstronnik.pl/#organization"
+    }
+  }
+];
+---
+<Layout
+  hideFooter={true}
+  isLanding={true}
+  title="Strony dla artystów i przewodników | Twój Stronnik"
+  description="Twój Stronnik oferuje gotowe strony internetowe dla artystów i przewodników. Galerie, sklepy z obrazami, wycieczki, cenniki i panel do edycji treści."
+  structuredData={structuredData}
+>
+  <AudienceChooser />
+</Layout>

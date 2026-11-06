@@ -1,0 +1,22 @@
+# Przykład jednostki systemd, gdy projekt jest w /var/www/twojstronnik/contact-server
+# Dopasuj ścieżki oraz użytkownika i grupę do swojego serwera.
+[Unit]
+Description=Twój Stronnik - formularz kontaktowy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/twojstronnik/contact-server
+ExecStart=/usr/bin/node --env-file=.env src/index.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import About from '../../components/sections/About.astro';
+import Projects from '../../components/sections/Projects.astro';
+import Steps from '../../components/sections/Steps.astro';
+import Pricing from '../../components/sections/Pricing.astro';
+import Contact from '../../components/sections/Contact.astro';
+
+const features = [
+  {
+    title: 'Samodzielne zarządzanie ofertą',
+    text: 'Dodawaj nowe wycieczki, aktualizuj opisy, zdjęcia i ceny. Zarządzaj swoją ofertą bez znajomości programowania.',
+  },
+  {
+    title: 'Szczegółowa prezentacja wycieczek',
+    text: 'Każda wycieczka może mieć własną podstronę z opisem programu, zdjęciami i najważniejszymi informacjami dla uczestników.',
+  },
+  {
+    title: 'Galerie zdjęć',
+    text: 'Prezentuj zdjęcia atrakcji turystycznych, miejsc i tras. Zachęcaj odwiedzających do poznania Twojej oferty.',
+  },
+  {
+    title: 'Przejrzysty cennik',
+    text: 'Przedstawiaj ceny wycieczek i usług w czytelnej formie. Aktualizuj je samodzielnie, gdy tylko zajdzie taka potrzeba.',
+  },
+  {
+    title: 'Własne podstrony i treści',
+    text: 'Przedstaw siebie, swoje doświadczenie i najważniejsze informacje dla klientów. Edytuj treści dedykowanych podstron w dowolnym momencie.',
+  },
+  {
+    title: 'Formularz kontaktowy',
+    text: 'Umożliwiaj klientom wysyłanie zapytań o wycieczki bezpośrednio przez stronę. Otrzymuj wiadomości od zainteresowanych osób.',
+  },
+];
+
+const projects = [
+  {
+    eyebrow: 'Przewodnik Sudecki',
+    title: 'APS-Arek',
+    href: 'https://aps-arek.pl',
+    logo: '/project-aps-arek.webp',
+    logoAlt: 'Logo Przewodnika Sudeckiego APS-Arek',
+  },
+];
+
+const steps = [
+  {
+    title: 'Sprawdzasz stronę w działaniu',
+    text: 'Odwiedzasz działającą stronę przewodnicką, żeby zobaczyć jej wygląd i funkcjonalności. To gotowy projekt, więc nie trzeba niczego tworzyć od podstaw.',
+  },
+  {
+    title: 'Przekazujesz podstawowe informacje',
+    text: 'Potrzebujemy jedynie nazwy Twojej działalności oraz podstawowych danych. Pozostałymi sprawami technicznymi zajmiemy się sami.',
+  },
+  {
+    title: 'Uruchamiamy Twoją stronę',
+    text: 'Przygotowujemy stronę pod Twoją marką, konfigurujemy domenę i uruchamiamy ją w internecie. Otrzymujesz dostęp do panelu administracyjnego i możesz od razu dodawać swoje wycieczki.',
+  },
+];
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://twojstronnik.pl/dla-przewodnikow/#service",
+  "name": "Strony internetowe dla przewodników turystycznych",
+  "serviceType": "Strony internetowe dla przewodników turystycznych",
+  "url": "https://twojstronnik.pl/dla-przewodnikow/",
+  "provider": {
+    "@id": "https://twojstronnik.pl/#organization"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Polska"
+  },
+  "description": "Gotowa strona dla przewodnika turystycznego: oferta wycieczek, galerie zdjęć, cennik, formularz kontaktowy i panel edycji. Uruchomienie 600 zł."
+};
+---
+<Layout
+  guideTheme
+  title="Strona internetowa dla przewodnika turystycznego | Twój Stronnik"
+  description="Gotowa strona dla przewodnika turystycznego: oferta wycieczek, galerie zdjęć, cennik, formularz kontaktowy i panel edycji. Uruchomienie 600 zł."
+  structuredData={structuredData}
+>
+  <Hero
+    theme="guide"
+    eyebrow="Strona dla przewodnika"
+    title="Ty zajmujesz się wycieczkami. My zajmiemy się Twoją stroną."
+    text="Otrzymujesz gotową, w pełni funkcjonalną stronę internetową opartą na naszym autorskim projekcie. Bez wiedzy technicznej, bez zbędnych komplikacji i bez wysokich kosztów tworzenia strony od podstaw."
+    primaryLabel="Zobacz realizację"
+    primaryHref="#realizacje"
+    secondaryLabel="Porozmawiajmy o stronie"
+    secondaryHref="#kontakt"
+  />
+  <About
+    eyebrow="Strona dla przewodnika"
+    title="Twoja własna strona przewodnicka. Pełna możliwości."
+    intro="Prezentuj swoje wycieczki, opisuj trasy i pokazuj zdjęcia odwiedzanych miejsc. Publikuj cenniki, aktualizuj ofertę i odbieraj zapytania od zainteresowanych klientów."
+    items={features}
+  />
+  <Projects
+    title="Nasz projekt w internecie. Sprawdź sam, jak działa."
+    intro="Zobacz działającą stronę opartą na naszym autorskim rozwiązaniu. Sprawdź, jak prezentuje wycieczki, zdjęcia i ofertę przewodnika."
+    projects={projects}
+  />
+  <Steps title="Trzy kroki do własnej strony" steps={steps} />
+  <Pricing
+    title="Twoja własna strona przewodnicka w przystępnej cenie"
+    text="Profesjonalna strona internetowa nie musi oznaczać dużych wydatków. Dzięki gotowemu rozwiązaniu otrzymujesz wszystkie niezbędne funkcjonalności bez kosztów tworzenia strony od podstaw."
+    setupPrice="600 zł"
+    monthlyPrice="50 zł"
+  />
+  <Contact
+    contactType="guide"
+    title="Zainteresowała Cię nasza oferta?"
+    text="Napisz do nas, a odpowiemy na Twoje pytania i pomożemy rozpocząć korzystanie z własnej strony przewodnickiej."
+    messagePlaceholder="Dzień dobry, jestem zainteresowany uruchomieniem strony dla przewodnika. Chciałbym dowiedzieć się więcej..."
+    showProjectNote={false}
+  />
+</Layout>

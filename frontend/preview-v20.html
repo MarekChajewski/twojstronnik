@@ -1,0 +1,76 @@
+<!doctype html><html lang="pl"><head><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="./src/styles/global.css"></head><body class="artist-theme">
+<nav class="nav" data-site-nav><div class="nav-shell"><a class="brand" href="/" aria-label="Strona glowna"><span class="brand-mark">TS</span><span class="brand-copy"><strong>Twój Stronnik</strong></span></a>
+<button class="nav-toggle" type="button" aria-label="Otwórz menu" aria-controls="primary-navigation" aria-expanded="false" data-nav-toggle><span class="nav-toggle-line"></span><span class="nav-toggle-line"></span><span class="nav-toggle-line"></span></button>
+<ul class="navlista" id="primary-navigation"><li><a href="#start">Start</a></li><li><a href="#start">Dla artystów</a></li><li><a href="#start">Dla przewodników</a></li><li><a href="#realizacje">Realizacje</a></li><li><a href="#jak-to-dziala">Jak to działa</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div></nav>
+<main><section class="hero hero-artist" id="start"><div class="container"><h1>Ty zajmujesz się sztuką. My zajmiemy się Twoją stroną.</h1><p>Otrzymujesz gotową, w pełni funkcjonalną galerię internetową opartą na naszym autorskim projekcie.</p></div></section>
+<section class="my-projects" id="realizacje"><div class="container"><span class="eyebrow">Realizacje</span><h2>Nasz projekt w internecie. Sprawdź sam, jak działa.</h2><p>Odwiedź stronę.</p><div class="projects-grid projects-grid--two">
+<article class="projects-item projects-item--with-logo"><div class="project-content"><span class="project-eyebrow">Galeria i sprzedaż</span><h3>Czas na obraz</h3><a class="project-link" href="https://czasnaobraz.pl">Zobacz realizację</a></div><div class="project-logo"><div class="project-logo-frame"><img src="./public/project-czasnaobraz.webp" alt="" width="800" height="620"></div></div></article>
+<article class="projects-item projects-item--with-logo"><div class="project-content"><span class="project-eyebrow">Galeria artystyczna</span><h3>Opowieści Kolorem</h3><a class="project-link" href="https://opowiescikolorem.pl">Zobacz realizację</a></div><div class="project-logo"><div class="project-logo-frame"><img src="./public/project-opowiesci.webp" alt="" width="800" height="620"></div></div></article>
+</div></div></section>
+<section class="steps" id="jak-to-dziala"><div class="container"><h2>Trzy kroki do własnej galerii</h2><div class="three-steps-grid"><article class="three-steps-item"><span class="step-number">1</span><h3>Wybierasz gotowe rozwiązanie</h3></article></div></div></section>
+<section class="contact" id="kontakt"><div class="container"><h2>Kontakt</h2><p>Zapraszamy</p></div></section></main>
+<script>
+  const nav = document.querySelector('[data-site-nav]');
+  const toggle = nav?.querySelector('[data-nav-toggle]');
+  const mobileQuery = window.matchMedia('(max-width: 900px)');
+
+  const closeMenu = () => {
+    if (!nav || !toggle) return;
+    nav.classList.remove('nav--open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Otwórz menu');
+  };
+
+  if (nav && toggle) {
+    toggle.addEventListener('click', () => {
+      const shouldOpen = !nav.classList.contains('nav--open');
+      nav.classList.toggle('nav--open', shouldOpen);
+      nav.classList.remove('nav--hidden');
+      toggle.setAttribute('aria-expanded', String(shouldOpen));
+      toggle.setAttribute('aria-label', shouldOpen ? 'Zamknij menu' : 'Otwórz menu');
+    });
+
+    nav.querySelectorAll('.navlista a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && nav.classList.contains('nav--open')) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('pointerdown', (event) => {
+      if (!nav.contains(event.target)) closeMenu();
+    });
+
+    mobileQuery.addEventListener('change', closeMenu);
+
+    // Pasek znika podczas przewijania w dół, a pojawia się już przy
+    // pierwszym ruchu w górę (także po długim przewijaniu).
+    let previousY = Math.max(0, window.scrollY);
+    let ticking = false;
+    const updateNavOnScroll = () => {
+      const currentY = Math.max(0, window.scrollY);
+      const delta = currentY - previousY;
+      const isMenuOpen = nav.classList.contains('nav--open');
+      const nearTop = currentY <= nav.offsetHeight + 8;
+
+      if (nearTop || isMenuOpen || delta < -0.5) {
+        nav.classList.remove('nav--hidden');
+      } else if (delta > 0.5) {
+        nav.classList.add('nav--hidden');
+      }
+      previousY = currentY;
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateNavOnScroll);
+      }
+    }, { passive: true });
+  }
+</script></body></html>

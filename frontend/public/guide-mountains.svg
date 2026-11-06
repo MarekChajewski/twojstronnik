@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 760" role="img" aria-label="Stylizowane pasma górskie i ścieżka w dolinie">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0.15" y2="1"><stop stop-color="#86a9a0"/><stop offset="1" stop-color="#d9dfc9"/></linearGradient>
+  <linearGradient id="peak" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#748d82"/><stop offset="1" stop-color="#456b5f"/></linearGradient>
+  <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#527d68"/><stop offset="1" stop-color="#2d5847"/></linearGradient>
+  <linearGradient id="valley" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#355f4c"/><stop offset="1" stop-color="#173f32"/></linearGradient>
+  <clipPath id="area"><rect width="1050" height="760" rx="6"/></clipPath>
+  <pattern id="grain" width="37" height="43" patternUnits="userSpaceOnUse"><circle cx="5" cy="6" r="1" fill="#fff" opacity=".04"/><circle cx="17" cy="27" r=".8" fill="#000" opacity=".05"/></pattern>
+</defs>
+<g clip-path="url(#area)">
+  <rect width="1050" height="760" fill="url(#sky)"/>
+  <circle cx="790" cy="158" r="81" fill="#ead3a1" opacity=".84"/>
+  <circle cx="790" cy="158" r="113" fill="none" stroke="#f0e4bd" stroke-width="1.4" opacity=".5"/>
+  <g fill="none" stroke="#d5e4d7" stroke-width="1.6" opacity=".30"><path d="M-20 263C148 160 235 252 369 176S614 182 746 119"/><path d="M-20 290C148 187 235 279 369 203S614 209 746 146"/><path d="M-20 317C148 214 235 306 369 230S614 236 746 173"/></g>
+  <path d="M-40 469L123 260 240 379 395 181 581 421 703 242 891 434 1030 315 1090 452V760H-40Z" fill="#77998d"/>
+  <path d="M200 382L395 181 481 310 444 286 416 321 385 276 339 332 312 314Z" fill="#e6e9dc" opacity=".86"/>
+  <path d="M595 346L703 242 794 344 744 324 721 343 700 302 669 336Z" fill="#e6e9dc" opacity=".60"/>
+  <path d="M-30 508C142 427 209 450 345 480S606 369 771 431 968 429 1100 391V760H-30Z" fill="url(#peak)"/>
+  <path d="M-50 562C120 505 221 568 346 535S602 492 777 535 935 477 1110 489V760H-50Z" fill="#7a9b79"/>
+  <path d="M-50 642C100 521 242 577 402 599S683 552 800 577 1048 535 1100 580V760H-50Z" fill="url(#hill)"/>
+  <path d="M-40 700C154 576 278 666 404 658S676 610 839 651 1001 616 1100 639V760H-40Z" fill="url(#valley)"/>
+  <path d="M506 760C514 704 594 683 651 646 689 623 699 611 683 591" fill="none" stroke="#d4bb8b" stroke-width="30" stroke-linecap="round" opacity=".75"/>
+  <path d="M506 760C514 704 594 683 651 646 689 623 699 611 683 591" fill="none" stroke="#f0d9a6" stroke-width="10" stroke-linecap="round" opacity=".66"/>
+  <g fill="#234b3a" opacity=".90"><path d="M77 634l24-68 25 68h-13l21 48H65l23-48Z"/><path d="M163 655l21-60 22 60h-10l19 44h-65l22-44Z"/><path d="M244 648l30-82 29 82h-16l23 55h-77l25-55Z"/><path d="M864 638l34-96 33 96h-18l29 64h-90l30-64Z"/><path d="M935 658l26-76 27 76h-16l22 52h-71l23-52Z"/><path d="M1003 615l29-75 28 75h-15l28 57h-85l28-57Z"/></g>
+  <g fill="none" stroke="#91b29a" stroke-width="2" opacity=".18"><path d="M-20 733C98 669 144 698 222 721S393 710 469 691"/><path d="M-20 752C98 688 144 717 222 740S393 729 469 710"/><path d="M693 732C816 677 931 708 1070 686"/><path d="M693 752C816 697 931 728 1070 706"/></g>
+  <rect width="1050" height="760" fill="url(#grain)"/>
+</g>
+</svg>

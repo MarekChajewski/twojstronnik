@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620" role="img" aria-label="APS-Arek">
+ <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#eaf2e8"/><stop offset="1" stop-color="#bed1c1"/></linearGradient></defs>
+ <rect width="800" height="620" fill="url(#sky)"/>
+ <circle cx="400" cy="241" r="161" fill="#f0f4ed" opacity=".75"/>
+ <path d="M183 333 L302 192 L370 265 L430 157 L620 333Z" fill="#6c9987"/>
+ <path d="M292 282 L302 192 L370 265 L430 157 L535 265 L468 239 L430 205 L387 286 L335 245Z" fill="#e5ede4"/>
+ <path d="M178 335 Q279 276 400 325 T623 331 V383 H178Z" fill="#2d6a55"/>
+ <path d="M160 376 Q303 351 408 385 T641 368 V414 H160Z" fill="#1e513d"/>
+ <text x="400" y="476" text-anchor="middle" fill="#1f4b3a" font-family="Arial,sans-serif" font-size="73" font-weight="800" letter-spacing="4">APS-AREK</text>
+ <path d="M252 505 H548" stroke="#b99b64" stroke-width="3"/>
+ <text x="400" y="548" text-anchor="middle" fill="#456a57" font-family="Arial,sans-serif" font-size="23" font-weight="700" letter-spacing="4">PRZEWODNIK SUDECKI</text>
+ </svg>

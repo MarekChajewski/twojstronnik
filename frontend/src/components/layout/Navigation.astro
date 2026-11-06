@@ -1,0 +1,127 @@
+---
+const path = Astro.url.pathname;
+const isHome = path === '/';
+const isLegal = ['/polityka-prywatnosci/', '/polityka-cookies/', '/regulamin/', '/odstapienie-od-umowy/', '/powierzenie-danych/'].includes(path);
+const audienceBase = path.startsWith('/dla-artystow')
+  ? '/dla-artystow/'
+  : path.startsWith('/dla-przewodnikow')
+    ? '/dla-przewodnikow/'
+    : '/';
+
+const sectionHref = (hash: string) => `${audienceBase}${hash}`;
+---
+<nav class="nav" data-site-nav aria-label="Główna nawigacja">
+  <div class="nav-shell">
+    <a class="brand" href="/" aria-label="Twój Stronnik — strona główna">
+      <img class="brand-logo" src="/logo-ts.png" alt="" width="44" height="44" decoding="async" />
+      <span class="brand-copy">
+        <strong>Twój Stronnik</strong>
+      </span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Otwórz menu"
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+      data-nav-toggle
+    >
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+    </button>
+
+    <ul class="navlista" id="primary-navigation">
+      {isHome ? (
+        <>
+          <li><a href="/dla-artystow/">Dla artystów</a></li>
+          <li><a href="/dla-przewodnikow/">Dla przewodników</a></li>
+        </>
+      ) : isLegal ? (
+        <>
+          <li><a href="/">Start</a></li>
+          <li><a href="/dla-artystow/">Dla artystów</a></li>
+          <li><a href="/dla-przewodnikow/">Dla przewodników</a></li>
+          <li><a href="mailto:kontakt@twojstronnik.pl">Kontakt</a></li>
+        </>
+      ) : (
+        <>
+          <li><a href="/">Start</a></li>
+          <li><a href="/dla-artystow/">Dla artystów</a></li>
+          <li><a href="/dla-przewodnikow/">Dla przewodników</a></li>
+          <li><a href={sectionHref('#realizacje')}>Realizacje</a></li>
+          <li><a href={sectionHref('#jak-to-dziala')}>Jak to działa</a></li>
+          <li><a href={sectionHref('#kontakt')}>Kontakt</a></li>
+        </>
+      )}
+    </ul>
+  </div>
+</nav>
+
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-site-nav]');
+  const toggle = nav?.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const mobileQuery = window.matchMedia('(max-width: 900px)');
+
+  const closeMenu = () => {
+    if (!nav || !toggle) return;
+    nav.classList.remove('nav--open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Otwórz menu');
+  };
+
+  if (nav && toggle) {
+    toggle.addEventListener('click', () => {
+      const shouldOpen = !nav.classList.contains('nav--open');
+      nav.classList.toggle('nav--open', shouldOpen);
+      nav.classList.remove('nav--hidden');
+      toggle.setAttribute('aria-expanded', String(shouldOpen));
+      toggle.setAttribute('aria-label', shouldOpen ? 'Zamknij menu' : 'Otwórz menu');
+    });
+
+    nav.querySelectorAll<HTMLAnchorElement>('.navlista a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && nav.classList.contains('nav--open')) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('pointerdown', (event) => {
+      if (!nav.contains(event.target as Node)) closeMenu();
+    });
+
+    mobileQuery.addEventListener('change', closeMenu);
+
+    // Pasek znika podczas przewijania w dół, a pojawia się już przy
+    // pierwszym ruchu w górę (także po długim przewijaniu).
+    let previousY = Math.max(0, window.scrollY);
+    let ticking = false;
+    const updateNavOnScroll = () => {
+      const currentY = Math.max(0, window.scrollY);
+      const delta = currentY - previousY;
+      const isMenuOpen = nav.classList.contains('nav--open');
+      const nearTop = currentY <= nav.offsetHeight + 8;
+
+      if (nearTop || isMenuOpen || delta < -0.5) {
+        nav.classList.remove('nav--hidden');
+      } else if (delta > 0.5) {
+        nav.classList.add('nav--hidden');
+      }
+      previousY = currentY;
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateNavOnScroll);
+      }
+    }, { passive: true });
+  }
+</script>

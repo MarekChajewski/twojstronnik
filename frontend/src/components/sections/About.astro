@@ -1,0 +1,30 @@
+---
+interface Item {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  items: Item[];
+}
+
+const { eyebrow = 'Co otrzymujesz', title, intro, items } = Astro.props;
+---
+<section class="about">
+  <div class="container">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2>{title}</h2>
+    {intro && <p>{intro}</p>}
+    <div class="about-grid">
+      {items.map((item) => (
+        <article class="about-item">
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

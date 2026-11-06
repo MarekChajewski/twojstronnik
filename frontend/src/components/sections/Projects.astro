@@ -1,0 +1,35 @@
+---
+import ProjectCard from '../ProjectCard.astro';
+
+interface Project {
+  title: string;
+  description?: string;
+  href?: string;
+  tags?: string[];
+  eyebrow?: string;
+  logo?: string;
+  logoAlt?: string;
+}
+
+interface Props {
+  title?: string;
+  intro?: string;
+  projects: Project[];
+}
+
+const {
+  title = 'Wybrane realizacje',
+  intro = 'Najlepiej pokazują, jak wygląda strona dopasowana do konkretnej działalności.',
+  projects,
+} = Astro.props;
+---
+<section class="my-projects" id="realizacje">
+  <div class="container">
+    <span class="eyebrow">Realizacje</span>
+    <h2>{title}</h2>
+    <p>{intro}</p>
+    <div class:list={["projects-grid", { "projects-grid--two": projects.length === 2, "projects-grid--single": projects.length === 1 } ]}>
+      {projects.map((project) => <ProjectCard {...project} />)}
+    </div>
+  </div>
+</section>
