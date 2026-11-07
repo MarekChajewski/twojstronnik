@@ -8,3 +8,5 @@ dist/
 !.env.docker.example
 
 *.loghasla.txt
+
+hasla.txt
