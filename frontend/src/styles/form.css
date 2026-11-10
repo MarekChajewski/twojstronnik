@@ -1,0 +1,35 @@
+.contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+  transform: none;
+}
+
+.contact-form-status {
+  margin: 16px 0 0;
+  padding: 13px 15px;
+  border-radius: 8px;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+.contact-form-status[hidden] { display: none; }
+.contact-form-status.is-success {
+  border: 1px solid #a6d1b5;
+  background: #e5f3e9;
+  color: #164734;
+}
+.contact-form-status.is-error {
+  border: 1px solid #e2a7a2;
+  background: #fceae7;
+  color: #7b2424;
+}
+.contact-form-noscript { margin-top: 16px; font-size: 0.92rem; }
+
+/* Ukryte pole zabezpieczające formularz przed prostymi botami. */
+.contact-honeypot {
+  position: absolute;
+  top: auto;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

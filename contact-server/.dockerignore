@@ -1,8 +1,6 @@
-node_modules/
+node_modules
 .env
 .env.*
-.git/
+.git
 *.log
-test/
-deploy/
-README.md
+test

@@ -17,7 +17,7 @@ const features = [
     text: 'Odwiedzający mogą przeglądać Twoje prace według kategorii, stylu, techniki wykonania czy rozmiaru. Dzięki filtrom łatwo odnajdą interesujące ich dzieła.',
   },
   {
-    title: 'Kontakt albo sprzedaż — zależnie od potrzeb',
+    title: 'Prezentuj swoje prace lub sprzedawaj je online',
     text: 'Strona może działać jako portfolio i galeria z zapytaniami o dzieło albo jako sklep internetowy. W każdej chwili możesz zmienić jej profil działania z galerii na sklep lub odwrotnie, bez budowania strony od nowa.',
   },
   {
@@ -65,28 +65,11 @@ const steps = [
     text: 'Przygotowujemy stronę pod Twoją marką, konfigurujemy domenę i uruchamiamy ją w internecie. Otrzymujesz dostęp do panelu administracyjnego i możesz od razu dodawać swoje prace.',
   },
 ];
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": "https://twojstronnik.pl/dla-artystow/#service",
-  "name": "Strony internetowe, galerie i sklepy dla artystów",
-  "serviceType": "Strony internetowe, galerie i sklepy dla artystów",
-  "url": "https://twojstronnik.pl/dla-artystow/",
-  "provider": {
-    "@id": "https://twojstronnik.pl/#organization"
-  },
-  "areaServed": {
-    "@type": "Country",
-    "name": "Polska"
-  },
-  "description": "Gotowa strona internetowa dla artysty: galeria dzieł, portfolio lub sklep internetowy. Samodzielna edycja prac i kontakt z klientami. Uruchomienie od 600 zł."
-};
 ---
 <Layout
-  artistTheme
-  title="Strona internetowa dla artysty i galeria online | Twój Stronnik"
-  description="Gotowa strona internetowa dla artysty: galeria dzieł, portfolio lub sklep internetowy. Samodzielna edycja prac i kontakt z klientami. Uruchomienie od 600 zł."
-  structuredData={structuredData}
+  theme="artist"
+  title="Strony dla artystów — Twój Stronnik"
+  description="Galerie, portfolio i sklepy internetowe dla artystów. Prezentacja dzieł, zapytania o prace, panel administracyjny i możliwość sprzedaży online."
 >
   <Hero
     theme="artist"
@@ -121,6 +104,5 @@ const structuredData = {
     title="Zainteresowała Cię nasza oferta?"
     text="Napisz do nas, a odpowiemy na Twoje pytania i pomożemy rozpocząć korzystanie z własnej galerii internetowej."
     messagePlaceholder="Dzień dobry, jestem zainteresowany uruchomieniem własnej galerii internetowej. Chciałbym dowiedzieć się więcej..."
-    showProjectNote={false}
   />
 </Layout>

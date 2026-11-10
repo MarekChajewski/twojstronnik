@@ -1,28 +1,25 @@
 ---
-interface Item {
-  title: string;
-  text: string;
-}
+import type { Feature } from '../../types/content';
 
 interface Props {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
-  intro?: string;
-  items: Item[];
+  intro: string;
+  items: Feature[];
 }
 
-const { eyebrow = 'Co otrzymujesz', title, intro, items } = Astro.props;
+const { eyebrow, title, intro, items } = Astro.props;
 ---
 <section class="about">
   <div class="container">
     <span class="eyebrow">{eyebrow}</span>
     <h2>{title}</h2>
-    {intro && <p>{intro}</p>}
+    <p>{intro}</p>
     <div class="about-grid">
-      {items.map((item) => (
-        <article class="about-item">
-          <h3>{item.title}</h3>
-          <p>{item.text}</p>
+      {items.map(({ title, text }) => (
+        <article class="about-item" data-pressable>
+          <h3>{title}</h3>
+          <p>{text}</p>
         </article>
       ))}
     </div>

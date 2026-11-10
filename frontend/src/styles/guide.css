@@ -1,0 +1,140 @@
+
+body.guide-theme {
+  --page-background: #e6efe5;
+  --text-color: #1b352e;
+  --muted-color: #4a6257;
+  --accent-color: #255849;
+  --accent-hover: #173d30;
+  --surface-color: #ffffff;
+  --surface-border: #cdded0;
+  --surface-border-hover: #87ad94;
+  --input-border: #aebfb3;
+  --input-focus-ring: rgba(64, 128, 87, 0.13);
+  --step-color: #397454;
+  --price-card-bg: #b7cfbc;
+  --card-shadow: 0 9px 27px rgba(31, 61, 46, 0.055);
+  --card-shadow-hover: 0 16px 35px rgba(27, 55, 43, 0.10);
+  --section-spacing: clamp(76px, 8vw, 112px);
+  font-size: 18px;
+}
+
+.guide-theme h2 { font-size: clamp(2.05rem, 3.85vw, 3.4rem); }
+.guide-theme h3 { line-height: 1.31; }
+.guide-theme .brand { color: #244538; }
+.guide-theme .nav { background: rgba(250, 251, 247, 0.97); }
+.guide-theme .nav-links a { color: #345348; }
+
+.guide-theme main > section:nth-of-type(odd) { background: #204738; }
+.guide-theme main > section:nth-of-type(even) { background: #e6efe5; }
+.guide-theme main > section { border-bottom: 1px solid #a3beaa; }
+
+.guide-theme main > section.pricing { background: #e6efe5; }
+
+.guide-theme .hero-guide {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 660px;
+  align-items: center;
+  overflow: hidden;
+  padding-block: clamp(108px, 11vw, 155px);
+  border-bottom: 5px solid #c7b18c;
+  background: radial-gradient(ellipse at 20% 20%, rgba(105, 156, 123, 0.16), transparent 48%),
+    linear-gradient(126deg, #14382d 0%, #1b4637 58%, #295b46 100%);
+}
+.guide-theme .hero-guide .eyebrow { color: #e7ce9c; }
+.guide-theme .hero-guide h1 {
+  max-width: min(60%, 730px);
+  color: #fffef7;
+  font-size: clamp(2.85rem, 5.2vw, 5.15rem);
+  font-weight: 770;
+  line-height: 1.12;
+}
+.guide-theme .hero-guide p {
+  max-width: min(56%, 660px);
+  color: #e2eee5;
+  line-height: 1.7;
+}
+.guide-hero-art {
+  position: absolute;
+  z-index: 0;
+  right: -5%;
+  bottom: 0;
+  width: min(60%, 880px);
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.93;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 32%);
+  mask-image: linear-gradient(to right, transparent, #000 32%);
+  pointer-events: none;
+}
+.guide-hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 47% 50%;
+}
+.guide-theme .hero .button-primary {
+  border-color: #dec292;
+  background: #e2c595;
+  color: #1d3c30;
+}
+.guide-theme .hero .button-primary:hover { border-color: #fff0c9; background: #f0d8ae; }
+.guide-theme .hero .button-secondary {
+  border-color: #b9d5c3;
+  background: transparent;
+  color: #fffdf6;
+}
+.guide-theme .hero .button-secondary:hover { border-color: #fffdf6; background: rgba(255, 255, 255, 0.13); }
+
+.guide-theme .my-projects h2,
+.guide-theme .my-projects > .container > p { color: #f9fbf4; }
+.guide-theme .my-projects .eyebrow { color: #e4cea1; }
+.guide-theme .project-content h3 { color: #1e3b30; }
+.guide-theme .project-eyebrow { color: #336b57; }
+.guide-theme .project-logo-frame { background: transparent; }
+
+.guide-theme .pricing h2 { color: #203f32; }
+.guide-theme .pricing .eyebrow { color: #35614d; }
+.guide-theme .pricing-price-label,
+.guide-theme .pricing-price-value { color: #173a2b; }
+.guide-theme .pricing-price-caption { color: #365344; }
+.guide-theme .contact-form label { color: #284b39; }
+.guide-theme .form-consent label { color: #4c6154; }
+.guide-theme .footer { border-top-color: #d7e1d8; }
+
+@media (max-width: 1040px) {
+  .guide-theme .hero-guide h1 { max-width: 68%; font-size: clamp(2.65rem, 5vw, 4.15rem); }
+  .guide-theme .hero-guide p { max-width: 60%; }
+  .guide-hero-art { right: -13%; width: 56%; }
+}
+
+@media (max-width: 760px) {
+  .guide-theme .hero-guide {
+    display: block;
+    min-height: auto;
+    padding: 74px 0 0;
+  }
+  .guide-theme .hero-guide .container { padding-bottom: 44px; }
+  .guide-theme .hero-guide h1 { max-width: 100%; font-size: clamp(2.5rem, 8.8vw, 3.6rem); }
+  .guide-theme .hero-guide p { max-width: 100%; font-size: 1.06rem; }
+  .guide-hero-art {
+    position: relative;
+    right: auto;
+    width: 100%;
+    height: clamp(215px, 40vw, 320px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%);
+    mask-image: linear-gradient(to bottom, transparent, #000 22%);
+  }
+  .guide-hero-art img { object-position: 50% 53%; }
+}
+
+@media (max-width: 520px) {
+  body.guide-theme { font-size: 17px; }
+  .guide-theme .hero-guide { padding-top: 59px; }
+  .guide-theme .hero-guide .container { padding-bottom: 33px; }
+  .guide-theme .hero-guide h1 { font-size: clamp(2.25rem, 9vw, 3.1rem); }
+  .guide-theme .hero-guide p { font-size: 1rem; }
+  .guide-theme .hero-guide .hero-actions { display: grid; }
+  .guide-hero-art { height: 205px; }
+}

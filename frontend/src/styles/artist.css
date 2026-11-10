@@ -1,0 +1,62 @@
+
+body.artist-theme {
+  --page-background: #fbf8f1;
+  --text-color: #302c27;
+  --muted-color: #5d554c;
+  --accent-color: #765637;
+  --accent-hover: #5a3e28;
+  --surface-color: #fffdf9;
+  --surface-border: #d6c7b5;
+  --surface-border-hover: #aa9276;
+  --input-border: #bfb3a5;
+  --input-focus-ring: rgba(118, 86, 55, 0.13);
+  --step-color: #987958;
+  --price-card-bg: #d7c2a5;
+  --card-shadow: 0 8px 26px rgba(80, 60, 36, 0.055);
+  --card-shadow-hover: 0 15px 34px rgba(74, 57, 37, 0.09);
+  --section-spacing: clamp(76px, 7.5vw, 108px);
+  font-size: 18px;
+}
+
+.artist-theme h1,
+.artist-theme h2,
+.artist-theme .project-content h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+}
+
+.artist-theme .brand { color: #302a23; }
+.artist-theme .nav { background: rgba(250, 247, 241, 0.97); }
+.artist-theme .hero {
+  background: #fbf8f1;
+}
+.artist-theme .hero h1 { color: #332b24; line-height: 1.14; }
+.artist-theme .hero p { color: #514940; }
+.artist-theme .button-secondary { border-color: #aa957f; }
+.artist-theme .button-secondary:hover { background: #eee3d5; }
+
+
+.artist-theme main > section:nth-of-type(odd) { background: #fbf8f1; }
+.artist-theme main > section:nth-of-type(even) { background: #e7d9c8; }
+.artist-theme main > section { border-bottom: 1px solid #c7baa8; }
+
+.artist-theme .about-item h3,
+.artist-theme .three-steps-item h3 { color: #312b25; }
+.artist-theme .project-content h3 { color: #332b24; }
+.artist-theme .project-eyebrow { color: #795a3b; }
+.artist-theme .project-logo-frame { background: transparent; }
+.artist-theme .step-number { font-family: Georgia, "Times New Roman", serif; font-weight: 500; }
+
+.artist-theme .pricing-price-card { color: #30261b; }
+.artist-theme .pricing-price-label,
+.artist-theme .pricing-price-value { color: #30261b; }
+.artist-theme .pricing-price-caption { color: #534333; }
+.artist-theme .form-group label { color: #39322b; }
+
+@media (max-width: 760px) {
+  .artist-theme .hero h1 { font-size: clamp(2.55rem, 9vw, 3.5rem); }
+}
+@media (max-width: 520px) {
+  body.artist-theme { font-size: 17px; }
+  .artist-theme .hero h1 { font-size: clamp(2.45rem, 9.2vw, 3.12rem); }
+}

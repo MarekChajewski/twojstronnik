@@ -1,37 +1,21 @@
 ---
-interface Props {
-  title: string;
-  description?: string;
-  href?: string;
-  tags?: string[];
-  eyebrow?: string;
-  logo?: string;
-  logoAlt?: string;
-}
+import type { Project } from '../types/content';
 
-const { title, description, href, tags = [], eyebrow, logo, logoAlt } = Astro.props;
+interface Props extends Project {}
+
+const { title, href, eyebrow, logo, logoAlt } = Astro.props;
 ---
-<article class:list={["projects-item", { "projects-item--with-logo": Boolean(logo) }]}>
+<article class="project-card" data-pressable>
   <div class="project-content">
-    {eyebrow && <span class="project-eyebrow">{eyebrow}</span>}
+    <span class="project-eyebrow">{eyebrow}</span>
     <h3>{title}</h3>
-    {description && <p>{description}</p>}
-    {tags.length > 0 && (
-      <ul class="project-tags" aria-label="Najważniejsze elementy realizacji">
-        {tags.map((tag) => <li>{tag}</li>)}
-      </ul>
-    )}
-    {href && (
-      <a class="project-link" href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}>
-        Zobacz realizację
-      </a>
-    )}
+    <a class="project-link" data-pressable href={href} target="_blank" rel="noopener noreferrer">
+      Zobacz realizację
+    </a>
   </div>
-  {logo && (
-    <div class="project-logo" aria-hidden="true">
-      <div class="project-logo-frame">
-        <img src={logo} alt={logoAlt || ''} width="800" height="620" loading="lazy" decoding="async" />
-      </div>
+  <div class="project-logo">
+    <div class="project-logo-frame">
+      <img src={logo} alt={logoAlt} width="800" height="620" loading="lazy" decoding="async" />
     </div>
-  )}
+  </div>
 </article>

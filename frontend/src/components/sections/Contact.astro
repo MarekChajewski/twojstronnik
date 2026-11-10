@@ -1,19 +1,12 @@
 ---
 interface Props {
-  title?: string;
-  text?: string;
-  messagePlaceholder?: string;
-  showProjectNote?: boolean;
-  contactType?: 'artist' | 'guide';
+  title: string;
+  text: string;
+  messagePlaceholder: string;
+  contactType: 'artist' | 'guide';
 }
 
-const {
-  title = 'Opowiedz mi, czego potrzebujesz',
-  text = 'Napisz kilka zdań o swojej działalności i o tym, co strona ma dla Ciebie robić. Na tej podstawie łatwiej ustalić dobry kierunek niż zaczynać od gotowego pakietu.',
-  messagePlaceholder = 'Napisz, czym się zajmujesz i czego potrzebujesz na stronie.',
-  showProjectNote = true,
-  contactType = 'artist',
-} = Astro.props;
+const { title, text, messagePlaceholder, contactType } = Astro.props;
 ---
 <section class="contact" id="kontakt">
   <div class="container">
@@ -21,12 +14,6 @@ const {
       <span class="eyebrow">Kontakt</span>
       <h2>{title}</h2>
       <p>{text}</p>
-      {showProjectNote && (
-        <div class="contact-note">
-          <strong>Nie musisz mieć gotowego projektu.</strong>
-          <span>Wystarczy pomysł, przykładowa strona albo lista rzeczy, które mają się znaleźć w serwisie.</span>
-        </div>
-      )}
     </div>
 
     <form class="contact-form" action="/api/contact" method="post" data-contact-form data-contact-type={contactType}>
@@ -50,7 +37,7 @@ const {
         <input id="consent" name="consent" type="checkbox" required />
         <label for="consent">Zapoznałem się z <a href="/polityka-prywatnosci/">polityką prywatności</a>.</label>
       </div>
-      <button type="submit">Wyślij wiadomość</button>
+      <button type="submit" data-pressable>Wyślij wiadomość</button>
       <p class="contact-form-status" role="status" aria-live="polite" data-form-status hidden></p>
       <noscript><p class="contact-form-noscript">Aby wysłać formularz, włącz JavaScript lub napisz na <a href="mailto:kontakt@twojstronnik.pl">kontakt@twojstronnik.pl</a>.</p></noscript>
     </form>
@@ -59,59 +46,6 @@ const {
 
 
 <script>
-  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
-    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    const status = form.querySelector<HTMLElement>('[data-form-status]');
-    if (!button || !status) return;
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      if (!form.reportValidity() || button.disabled) return;
-
-      const fields = new FormData(form);
-      const payload = {
-        name: String(fields.get('name') ?? '').trim(),
-        email: String(fields.get('email') ?? '').trim(),
-        message: String(fields.get('message') ?? '').trim(),
-        website: String(fields.get('website') ?? ''),
-        consent: fields.get('consent') === 'on',
-        source: form.dataset.contactType,
-      };
-
-      button.disabled = true;
-      button.textContent = 'Wysyłanie…';
-      status.hidden = true;
-      status.textContent = '';
-      status.classList.remove('is-error', 'is-success');
-
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify(payload),
-        });
-        if (!response.ok) {
-          if (response.status === 429) {
-            throw new Error('Wysłano zbyt wiele wiadomości. Spróbuj ponownie później.');
-          }
-          if (response.status === 400) {
-            throw new Error('Sprawdź poprawność danych i spróbuj ponownie.');
-          }
-          throw new Error('Nie udało się wysłać wiadomości. Spróbuj ponownie później lub napisz na kontakt@twojstronnik.pl.');
-        }
-
-        form.reset();
-        status.classList.add('is-success');
-        status.textContent = 'Dziękujemy! Wiadomość została wysłana. Odpowiemy na podany adres e-mail.';
-      } catch (error) {
-        status.classList.add('is-error');
-        status.textContent = error instanceof Error ? error.message : 'Nie udało się wysłać wiadomości. Spróbuj ponownie.';
-      } finally {
-        status.hidden = false;
-        button.disabled = false;
-        button.textContent = 'Wyślij wiadomość';
-      }
-    });
-  });
+  import { initContactForms } from '../../scripts/contact';
+  initContactForms();
 </script>

@@ -4,7 +4,7 @@ import { createContactServer } from '../src/app.mjs';
 
 const sample = { name: 'Anna Kowalska', email: 'anna@example.com', message: 'Dzień dobry, interesuje mnie galeria.', consent: true, source: 'artist', website: '' };
 
-async function fixture(fn = async () => undefined, trustProxy = false) {
+async function fixture(fn = async () => undefined) {
   const sent = [];
   let now = 1_000_000;
   const app = createContactServer({
@@ -12,7 +12,6 @@ async function fixture(fn = async () => undefined, trustProxy = false) {
     allowedOrigins: ['https://twojstronnik.pl'], from: 'kontakt@twojstronnik.pl', to: 'kontakt@twojstronnik.pl',
     clock: () => now,
     logger: { error() {} },
-    trustProxy,
   });
   await new Promise((resolve) => app.listen(0, '127.0.0.1', resolve));
   const url = `http://127.0.0.1:${app.address().port}/api/contact`;
@@ -84,25 +83,59 @@ test('Błąd SMTP: brak fałszywego potwierdzenia wysyłki', async (t) => {
 test('Nieprzesyłanie niepoprawnego JSON i nadmiernych danych', async (t) => {
   const f = await fixture(); t.after(() => f.close());
   assert.equal((await f.post(sample, { raw: '{' })).status, 400);
-  assert.equal((await f.post(sample, { raw: 'a'.repeat(18000) })).status, 413);
+  assert.equal((await f.post(sample, { raw: 'a'.repeat(40000) })).status, 413);
   assert.equal(f.sent.length, 0);
 });
 
+test('Healthcheck działa również bez skonfigurowanej poczty', async (t) => {
+  const app = createContactServer({
+    sendMail: null,
+    allowedOrigins: ['https://twojstronnik.pl'],
+    from: 'kontakt@twojstronnik.pl',
+    to: 'kontakt@twojstronnik.pl',
+  });
+  await new Promise((resolve) => app.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise((resolve) => app.close(resolve)));
+  const base = `http://127.0.0.1:${app.address().port}`;
+  const health = await fetch(`${base}/healthz`);
+  assert.equal(health.status, 200);
+  assert.deepEqual(await health.json(), { ok: true, smtpConfigured: false });
 
-test('Docker proxy: limit jest liczony osobno dla adresów klientów', async (t) => {
-  const f = await fixture(async () => undefined, true); t.after(() => f.close());
-  for (let i = 0; i < 5; i++) {
-    assert.equal((await f.post(sample, { headers: { 'X-Real-IP': '203.0.113.1' } })).status, 200);
-  }
-  assert.equal((await f.post(sample, { headers: { 'X-Real-IP': '203.0.113.1' } })).status, 429);
-  assert.equal((await f.post(sample, { headers: { 'X-Real-IP': '203.0.113.2' } })).status, 200);
-  assert.equal(f.sent.length, 6);
+  const res = await fetch(`${base}/api/contact`, {
+    method: 'POST',
+    headers: { Origin: 'https://twojstronnik.pl', 'Content-Type': 'application/json' },
+    body: JSON.stringify(sample),
+  });
+  assert.equal(res.status, 503);
 });
 
-test('Nieprawidłowy X-Real-IP nie tworzy odrębnej tożsamości limitera', async (t) => {
+test('Weryfikacja metody, nagłówka Origin i typu zawartości', async (t) => {
   const f = await fixture(); t.after(() => f.close());
-  for (let i = 0; i < 5; i++) {
-    assert.equal((await f.post(sample, { headers: { 'X-Real-IP': 'ip-niepoprawne-' + i } })).status, 200);
-  }
-  assert.equal((await f.post(sample, { headers: { 'X-Real-IP': 'inna-wartosc' } })).status, 429);
+  assert.equal((await fetch(f.url)).status, 405);
+  assert.equal((await f.post(sample, { contentType: 'text/plain' })).status, 415);
+  assert.equal((await f.post(sample, { headers: { Origin: '' } })).status, 403);
+  assert.equal(f.sent.length, 0);
+});
+
+test('Limit według IP za zaufanym reverse proxy', async (t) => {
+  const sent = [];
+  const app = createContactServer({
+    sendMail: async (mail) => sent.push(mail),
+    allowedOrigins: ['https://twojstronnik.pl'],
+    from: 'kontakt@twojstronnik.pl',
+    to: 'kontakt@twojstronnik.pl',
+    trustProxy: true,
+  });
+  await new Promise((resolve) => app.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise((resolve) => app.close(resolve)));
+  const url = `http://127.0.0.1:${app.address().port}/api/contact`;
+  const postAs = (ip) => fetch(url, {
+    method: 'POST',
+    headers: { Origin: 'https://twojstronnik.pl', 'Content-Type': 'application/json', 'X-Real-IP': ip },
+    body: JSON.stringify(sample),
+  });
+  for (let i = 0; i < 5; i++) assert.equal((await postAs('192.0.2.10')).status, 200);
+  assert.equal((await postAs('192.0.2.10')).status, 429);
+  assert.equal((await postAs('192.0.2.11')).status, 200);
+  assert.equal(sent.length, 6);
 });

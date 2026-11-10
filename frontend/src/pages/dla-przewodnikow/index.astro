@@ -58,28 +58,11 @@ const steps = [
     text: 'Przygotowujemy stronę pod Twoją marką, konfigurujemy domenę i uruchamiamy ją w internecie. Otrzymujesz dostęp do panelu administracyjnego i możesz od razu dodawać swoje wycieczki.',
   },
 ];
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": "https://twojstronnik.pl/dla-przewodnikow/#service",
-  "name": "Strony internetowe dla przewodników turystycznych",
-  "serviceType": "Strony internetowe dla przewodników turystycznych",
-  "url": "https://twojstronnik.pl/dla-przewodnikow/",
-  "provider": {
-    "@id": "https://twojstronnik.pl/#organization"
-  },
-  "areaServed": {
-    "@type": "Country",
-    "name": "Polska"
-  },
-  "description": "Gotowa strona dla przewodnika turystycznego: oferta wycieczek, galerie zdjęć, cennik, formularz kontaktowy i panel edycji. Uruchomienie 600 zł."
-};
 ---
 <Layout
-  guideTheme
-  title="Strona internetowa dla przewodnika turystycznego | Twój Stronnik"
-  description="Gotowa strona dla przewodnika turystycznego: oferta wycieczek, galerie zdjęć, cennik, formularz kontaktowy i panel edycji. Uruchomienie 600 zł."
-  structuredData={structuredData}
+  theme="guide"
+  title="Gotowa strona dla przewodnika — Twój Stronnik"
+  description="Gotowa strona internetowa dla przewodnika z panelem administracyjnym, ofertą wycieczek, cennikiem, galerią i formularzem kontaktowym. Uruchomienie 600 zł, abonament 50 zł miesięcznie."
 >
   <Hero
     theme="guide"
@@ -114,6 +97,5 @@ const structuredData = {
     title="Zainteresowała Cię nasza oferta?"
     text="Napisz do nas, a odpowiemy na Twoje pytania i pomożemy rozpocząć korzystanie z własnej strony przewodnickiej."
     messagePlaceholder="Dzień dobry, jestem zainteresowany uruchomieniem strony dla przewodnika. Chciałbym dowiedzieć się więcej..."
-    showProjectNote={false}
   />
 </Layout>

@@ -1,31 +1,24 @@
 ---
-interface Step {
-  title: string;
-  text: string;
-}
+import type { Step } from '../../types/content';
 
 interface Props {
-  title?: string;
-  intro?: string;
+  title: string;
   steps: Step[];
 }
 
-const {
-  title = 'Prosty proces od pomysłu do działającej strony',
-  intro,
-  steps,
-} = Astro.props;
+const { title, steps } = Astro.props;
 ---
 <section class="steps" id="jak-to-dziala">
   <div class="container">
     <span class="eyebrow">Jak to działa</span>
     <h2>{title}</h2>
-    {intro && <p>{intro}</p>}
     <div class="three-steps-grid">
       {steps.map((step, index) => (
-        <article class="three-steps-item">
-          <span class="step-number" aria-hidden="true">{index + 1}</span>
-          <h3>{step.title}</h3>
+        <article class="three-steps-item" data-pressable>
+          <div class="step-heading">
+            <span class="step-number" aria-hidden="true">{index + 1}</span>
+            <h3>{step.title}</h3>
+          </div>
           <p>{step.text}</p>
         </article>
       ))}

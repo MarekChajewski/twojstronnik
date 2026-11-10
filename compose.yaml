@@ -1,56 +1,37 @@
-# Twój Stronnik — Docker Compose (v32)
-# Publiczny HTTPS/DNS pozostają w istniejącym Nginx na VPS.
-# Na hoście udostępniony jest WYŁĄCZNIE port WWW na 127.0.0.1.
-name: twojstronnik
-
 services:
   contact:
     build:
       context: ./contact-server
-      dockerfile: Dockerfile
     restart: unless-stopped
     env_file:
       - .env.docker
     environment:
-      BIND_HOST: "0.0.0.0"
       PORT: "3107"
-      CONTAINER_MODE: "true"
+      BIND_HOST: 0.0.0.0
       TRUST_PROXY: "true"
+      # Lokalny podgląd i ewentualne publiczne adresy z .env.docker.
+      ALLOWED_ORIGINS: "http://localhost:${WEB_PORT:-8093},http://127.0.0.1:${WEB_PORT:-8093},${ALLOWED_ORIGINS:-https://twojstronnik.pl,https://www.twojstronnik.pl}"
     expose:
       - "3107"
-    networks:
-      - site
-    security_opt:
-      - no-new-privileges:true
     healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3107/healthz').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3107/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
       start_period: 10s
 
   web:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
     restart: unless-stopped
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8093}:80"
     depends_on:
       contact:
         condition: service_healthy
-    # Nie mapuj na 0.0.0.0 — wyjście do Internetu jest przez Nginx VPS.
-    ports:
-      - "127.0.0.1:${WEB_PORT:-8093}:80"
-    networks:
-      - site
-    security_opt:
-      - no-new-privileges:true
     healthcheck:
-      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/ || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-
-networks:
-  site:
-    driver: bridge
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s

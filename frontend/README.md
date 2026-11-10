@@ -1,46 +1,27 @@
-# Astro Starter Kit: Basics
+# Frontend
 
-```sh
-npm create astro@latest -- --template basics
+Statyczna strona Astro 5 z dwoma motywami graficznymi. Treści ofert i dokumenty prawne znajdują się w `src/pages/`. Wspólne elementy to komponenty z `src/components/`, zachowania przeglądarki z `src/scripts/`, a style z `src/styles/`.
+
+## Start
+
+```powershell
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Adres podglądu: `http://localhost:4321`.
 
-## 🚀 Project Structure
+## Budowanie i testy
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```powershell
+npm run build
+npm run seo:check
+npx playwright install chromium
+npm run test:e2e
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+`seo:check` czyta katalog `dist`, więc wymaga wcześniejszego buildu. Playwright uruchamia własny serwer developerski Astro i weryfikuje wygląd oraz działanie strony bez rzeczywistej wysyłki maili.
 
-## 🧞 Commands
+Formularz korzysta z `/api/contact`. Podczas pracy w Astro Dev Server żądania są przekierowywane na `http://127.0.0.1:3107`; w Dockerze routing zapewnia Nginx. Sam statyczny frontend nie obsługuje poczty.
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Przy pierwszym `npm install` powstanie pełny `package-lock.json` — dodaj go do repozytorium. Nie dodawaj `node_modules`, `dist` ani raportów Playwright.

@@ -1,25 +1,16 @@
 ---
 interface Props {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
   text: string;
   primaryLabel: string;
   primaryHref: string;
-  secondaryLabel?: string;
-  secondaryHref?: string;
-  theme?: 'default' | 'artist' | 'guide';
+  secondaryLabel: string;
+  secondaryHref: string;
+  theme: 'artist' | 'guide';
 }
 
-const {
-  eyebrow = 'Twój Stronnik',
-  title,
-  text,
-  primaryLabel,
-  primaryHref,
-  secondaryLabel,
-  secondaryHref,
-  theme = 'default',
-} = Astro.props;
+const { eyebrow, title, text, primaryLabel, primaryHref, secondaryLabel, secondaryHref, theme } = Astro.props;
 ---
 <section class={`hero hero-${theme}`}>
   <div class="container">
@@ -27,10 +18,8 @@ const {
     <h1>{title}</h1>
     <p>{text}</p>
     <div class="hero-actions">
-      <a class="button button-primary" href={primaryHref}>{primaryLabel}</a>
-      {secondaryLabel && secondaryHref && (
-        <a class="button button-secondary" href={secondaryHref}>{secondaryLabel}</a>
-      )}
+      <a class="button button-primary" data-pressable href={primaryHref}>{primaryLabel}</a>
+      <a class="button button-secondary" data-pressable href={secondaryHref}>{secondaryLabel}</a>
     </div>
   </div>
   {theme === 'guide' && (
